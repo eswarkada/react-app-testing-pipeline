@@ -1,0 +1,34 @@
+steps:
+  # Step 1: Install dependencies
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+    env:
+      - 'NODE_VERSION=18'  # Adjust if needed
+
+  # Step 2: Build the React app
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build']
+    env:
+      - 'NODE_ENV=production'
+
+  # Step 3: Deploy build artifacts to GCS (rsync to sync only changes)
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args:
+      - 'rsync'
+      - '-d'
+      - '-r'
+      - 'build/'
+      - 'gs://${_BUCKET_NAME}/'
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'  # Optional
+
+# Optional: Run tests before build
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+# Timeout and machine type
+timeout: '1200s'
+machineType: 'E2_HIGHCPU_8'
+
+# Images to build (if you need a custom Docker image, add here)
+images: []
