@@ -5,6 +5,10 @@ steps:
     env:
       - 'NODE_VERSION=18'  # Adjust if needed
 
+  # Verify Node.js version
+  - name: 'Node Version'
+    args: ['node','-v']
+    
   # Step 2: Build the React app
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'build']
@@ -27,4 +31,4 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
   # Timeout and machine type
-  machineType: 'E2_HIGHCPU_8'
+  # machineType: 'E2_HIGHCPU_8'
