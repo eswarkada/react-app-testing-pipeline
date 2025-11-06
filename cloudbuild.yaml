@@ -6,7 +6,7 @@ steps:
       - 'NODE_VERSION=18'  # Adjust if needed
 
   # Verify Node.js version
-  - name: 'Node Version'
+  - name: 'gcr.io/cloud-builders/npm'
     args: ['node','-v']
     
   # Step 2: Build the React app
