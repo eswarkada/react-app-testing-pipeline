@@ -19,8 +19,8 @@ steps:
       - '-r'
       - 'build/'
       - 'gs://${_BUCKET_NAME}/'
-    env:
-      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'  # Optional
+    # env:
+    #   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'  # Optional
 
 # Optional: Run tests before build
 options:
